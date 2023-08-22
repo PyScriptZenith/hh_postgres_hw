@@ -1,6 +1,7 @@
+import os
 from configparser import ConfigParser
 
-def config(filename='database.ini', section="postgresql"):
+def config(filename=os.getenv('db_connection_key'), section="postgresql"):
     """
     Парсит данные для подключения к БД
     :param filename: файл с данными

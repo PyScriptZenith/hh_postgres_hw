@@ -2,7 +2,7 @@ from _decimal import Decimal
 
 import psycopg2
 
-from src.classes.db_class__.config import config
+from general_code.config import config
 
 
 class DataBase:
