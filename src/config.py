@@ -1,7 +1,13 @@
 import os
 from configparser import ConfigParser
 
-def config(filename=os.getenv('db_connection_key'), section="postgresql"):
+from dotenv import load_dotenv
+
+load_dotenv()
+def config(
+    filename=os.getenv("DB_CONNECTION_KEY", default="database.ini"),
+    section="postgresql",
+):
     """
     Парсит данные для подключения к БД
     :param filename: файл с данными
@@ -16,8 +22,6 @@ def config(filename=os.getenv('db_connection_key'), section="postgresql"):
 
     else:
         raise Exception(
-            'Section {0} is not found in the {1} file'.format(section, filename))
+            "Section {0} is not found in the {1} file".format(section, filename)
+        )
     return db
-
-
-

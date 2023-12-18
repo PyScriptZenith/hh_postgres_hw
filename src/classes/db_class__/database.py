@@ -2,11 +2,10 @@ from _decimal import Decimal
 
 import psycopg2
 
-from general_code.config import config
+from src.config import config
 
 
 class DataBase:
-
     def __init__(self, db_name):
         self.db_name = db_name
 
@@ -39,9 +38,10 @@ class DataBase:
 
                     rows = cur.fetchall()
                     for row in rows:
-                        print(f'Название компании: {row[0]}\n'
-                              f'Количество вакансий: {row[1]}\n ')
-
+                        print(
+                            f"Название компании: {row[0]}\n"
+                            f"Количество вакансий: {row[1]}\n "
+                        )
 
         finally:
             conn.close()
@@ -50,10 +50,6 @@ class DataBase:
     Далее все шаги по подключению к БД, вводу SQL-скрипта аналогично.
     Меняется только назначение функций и результат вывода в консоль
     """
-
-
-
-
 
     def get_all_vacancies(self):
         """
@@ -65,17 +61,16 @@ class DataBase:
         try:
             with conn:
                 with conn.cursor() as cur:
-                    cur.execute(
-                        """SELECT * FROM vacancies"""
-                    )
+                    cur.execute("""SELECT * FROM vacancies""")
 
                     rows = cur.fetchall()
                     for row in rows:
-                        print(f'Название компании: {row[0]}\n'
-                              f'Название вакансии: {row[1]}\n'
-                              f'Заработная плата: {row[2]}\n'
-                              f'Ссылка на вакансию: {row[3]}\n')
-
+                        print(
+                            f"Название компании: {row[0]}\n"
+                            f"Название вакансии: {row[1]}\n"
+                            f"Заработная плата: {row[2]}\n"
+                            f"Ссылка на вакансию: {row[3]}\n"
+                        )
 
         finally:
             conn.close()
@@ -90,21 +85,16 @@ class DataBase:
         try:
             with conn:
                 with conn.cursor() as cur:
-                    cur.execute(
-                        """SELECT AVG(pay) as avg_pay FROM vacancies"""
-                    )
+                    cur.execute("""SELECT AVG(pay) as avg_pay FROM vacancies""")
 
                     rows = cur.fetchall()
                     for row in rows:
                         decimal_value = Decimal(row[0])
                         int_value = int(decimal_value)
-                        print(f'Средняя ЗП: {int_value} руб.')
-
+                        print(f"Средняя ЗП: {int_value} руб.")
 
         finally:
             conn.close()
-
-
 
     def get_vacancies_with_higher_salary(self):
         """
@@ -123,16 +113,13 @@ class DataBase:
 
                     rows = cur.fetchall()
                     for row in rows:
-                        print(f'Название вакансии: {row[0]}\n'
-                              f'Заработная плата: {row[1]}\n')
-
-
+                        print(
+                            f"Название вакансии: {row[0]}\n"
+                            f"Заработная плата: {row[1]}\n"
+                        )
 
         finally:
             conn.close()
-
-
-
 
     def get_vacancies_with_keyword(self, keyword: str):
         """
@@ -153,15 +140,12 @@ class DataBase:
 
                     rows = cur.fetchall()
                     for row in rows:
-                        print(f'Название компании: {row[0]}\n'
-                              f'Название вакансии: {row[1]}\n'
-                              f'Заработная плата: {row[2]}\n'
-                              f'Ссылка на вакансию: {row[3]}\n')
-
-
+                        print(
+                            f"Название компании: {row[0]}\n"
+                            f"Название вакансии: {row[1]}\n"
+                            f"Заработная плата: {row[2]}\n"
+                            f"Ссылка на вакансию: {row[3]}\n"
+                        )
 
         finally:
             conn.close()
-
-
-

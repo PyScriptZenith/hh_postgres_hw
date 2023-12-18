@@ -1,6 +1,6 @@
 import psycopg2
 
-from general_code.config import config
+from src.config import config
 
 
 def fill_the_table(db_name: str, data_to_record: list):
@@ -9,7 +9,6 @@ def fill_the_table(db_name: str, data_to_record: list):
     :param db_name: имя БД
     :param data_to_record: список кортежей с данными
     """
-
 
     # Парсим данные для подключения
 
@@ -20,9 +19,10 @@ def fill_the_table(db_name: str, data_to_record: list):
     try:
         with conn:
             with conn.cursor() as cur:
-
                 # Записываем данные в таблицу
-                cur.executemany(f'INSERT INTO vacancies VALUES (%s, %s, %s, %s)', data_to_record)
+                cur.executemany(
+                    f"INSERT INTO vacancies VALUES (%s, %s, %s, %s)", data_to_record
+                )
 
     finally:
         conn.close()
